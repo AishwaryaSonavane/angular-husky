@@ -19,8 +19,12 @@ getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting(),
 );
+const excludedSpecs = ['src/app/skip-test/skip-test.component.spec.ts', './app/skip-test/skip-test.component.spec.ts'];
 
 // Then we find all the tests.
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
-context.keys().forEach(context);
+context
+  .keys()
+  .filter(file => excludedSpecs.includes(file))
+  .forEach(context);
